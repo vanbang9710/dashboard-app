@@ -1,0 +1,69 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../dashboard-app1"
+		}
+	],
+	"settings": {
+		"terminal.integrated.cwd": "E:\\Code\\Rust\\projects\\dashboard-app",
+		"powershell.cwd": "E:\\Code\\Rust\\projects\\dashboard-app",
+		"git.ignoredRepositories": [
+			"e:\\ObsidianVaults"
+		],
+		// "files.insertFinalNewline": false,
+		//1 https://rust-analyzer.github.io/manual.html
+		"rust-analyzer.linkedProjects": [
+			"E:\\Code\\Rust\\projects\\dashboard-app\\Cargo.toml",
+		],
+		"rust-analyzer.checkOnSave": true,
+		"rust-analyzer.check.command": "clippy",
+		//2 leptos problems with rust-analyzer, https://book.leptos.dev/getting_started/leptos_dx.html#2-editor-autocompletion-inside-component-and-server
+		"rust-analyzer.procMacro.ignored": {
+			"leptos_macro": [
+				// "component",
+				"server",
+			],
+		},
+		// if code that is cfg-gated for the `ssr` feature is shown as inactive, you may want to tell rust-analyzer to enable the `ssr` feature by default. You can also use `rust-analyzer.cargo.allFeatures` to enable all features
+		"rust-analyzer.cargo.features": [
+			"ssr"
+		],
+		//2 change target dir, https://github.com/rust-lang/rust-analyzer/issues/6007
+		"rust-analyzer.server.extraEnv": {
+			"CARGO_TARGET_DIR": "target/analyzer"
+		},
+		"rust-analyzer.check.extraArgs": [
+			"--target-dir=target/analyzer"
+		],
+		"editor.renderWhitespace": "selection",
+		//1 bradlc.vscode-tailwindcss
+		"files.associations": {
+			"*.css": "tailwindcss"
+		},
+		//2 https://github.com/leptos-rs/leptos/discussions/125#discussioncomment-4245279 
+		"emmet.includeLanguages": {
+			"rust": "html",
+			"*.rs": "html"
+		},
+		"tailwindCSS.includeLanguages": {
+			"rust": "html",
+			"*.rs": "html"
+		},
+		"editor.quickSuggestions": {
+			"comments": "on",
+			"strings": true,
+		},
+		"css.validate": false,
+		"cSpell.words": [
+			"leptos"
+		],
+		"rust-analyzer.lens.references.adt.enable": true,
+		"rust-analyzer.lens.references.enumVariant.enable": true,
+		"rust-analyzer.lens.references.method.enable": true,
+		"rust-analyzer.lens.references.trait.enable": true,
+		"rust-analyzer.cargo.autoreload": true,
+	},
+}
