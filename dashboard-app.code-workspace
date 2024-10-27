@@ -11,14 +11,14 @@
 		"terminal.integrated.cwd": "E:\\Code\\Rust\\projects\\dashboard-app",
 		"powershell.cwd": "E:\\Code\\Rust\\projects\\dashboard-app",
 		"git.ignoredRepositories": [
-			"e:\\ObsidianVaults"
+			// "e:\\ObsidianVaults"
 		],
 		// "files.insertFinalNewline": false,
 		//1 https://rust-analyzer.github.io/manual.html
 		"rust-analyzer.linkedProjects": [
 			"E:\\Code\\Rust\\projects\\dashboard-app\\Cargo.toml",
 		],
-		"rust-analyzer.checkOnSave": true,
+		"rust-analyzer.checkOnSave": false,
 		"rust-analyzer.check.command": "clippy",
 		//2 leptos problems with rust-analyzer, https://book.leptos.dev/getting_started/leptos_dx.html#2-editor-autocompletion-inside-component-and-server
 		"rust-analyzer.procMacro.ignored": {
@@ -33,7 +33,7 @@
 		],
 		//2 change target dir, https://github.com/rust-lang/rust-analyzer/issues/6007
 		"rust-analyzer.server.extraEnv": {
-			"CARGO_TARGET_DIR": "target/analyzer"
+			// "CARGO_TARGET_DIR": "target/analyzer"
 		},
 		"rust-analyzer.check.extraArgs": [
 			"--target-dir=target/analyzer"
@@ -43,7 +43,7 @@
 		"files.associations": {
 			"*.css": "tailwindcss"
 		},
-		//2 https://github.com/leptos-rs/leptos/discussions/125#discussioncomment-4245279 
+		//2 tailwindcss with leptos https://github.com/leptos-rs/leptos/discussions/125#discussioncomment-4245279 
 		"emmet.includeLanguages": {
 			"rust": "html",
 			"*.rs": "html"
@@ -60,10 +60,6 @@
 		"cSpell.words": [
 			"leptos"
 		],
-		"rust-analyzer.lens.references.adt.enable": true,
-		"rust-analyzer.lens.references.enumVariant.enable": true,
-		"rust-analyzer.lens.references.method.enable": true,
-		"rust-analyzer.lens.references.trait.enable": true,
-		"rust-analyzer.cargo.autoreload": true,
+		"files.insertFinalNewline": true,
 	},
 }
