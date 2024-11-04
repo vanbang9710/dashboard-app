@@ -13,7 +13,6 @@
 		"git.ignoredRepositories": [
 			// "e:\\ObsidianVaults"
 		],
-		// "files.insertFinalNewline": false,
 		//1 https://rust-analyzer.github.io/manual.html
 		"rust-analyzer.linkedProjects": [
 			"E:\\Code\\Rust\\projects\\dashboard-app\\Cargo.toml",
@@ -33,7 +32,7 @@
 		],
 		//2 change target dir, https://github.com/rust-lang/rust-analyzer/issues/6007
 		"rust-analyzer.server.extraEnv": {
-			// "CARGO_TARGET_DIR": "target/analyzer"
+			"CARGO_TARGET_DIR": "target/analyzer"
 		},
 		"rust-analyzer.check.extraArgs": [
 			"--target-dir=target/analyzer"
@@ -61,5 +60,6 @@
 			"leptos"
 		],
 		"files.insertFinalNewline": true,
+		"terminal.integrated.defaultProfile.windows": "PowerShell",
 	},
 }

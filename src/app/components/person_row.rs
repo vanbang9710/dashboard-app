@@ -6,7 +6,7 @@ use std::rc::Rc;
 const ROW_STYLE: &str = "bg-[#283653] rounded px-10 py-5 mb-4 flex flex-row
     text-left items-left transition-all duration-1000 ease-in-out";
 
-const SHOW_ICON_STYLE: &str = "bg-transparent border-2 border-white px-2.5
+const SHOW_ICON_STYLE: &str = "bg-transparent border-2 border-white px-2.5 mt-2
     rounded-full text-white transition-all duration-500 ease-in-out text-xs
     mr-3 w-7 h-7 hover:w-8 hover:h-8 hover:mb-1";
 

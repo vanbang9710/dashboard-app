@@ -16,6 +16,13 @@ pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
 
+    let script_url = "https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js".to_string();
+    let script_gl_url =
+        "https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js".to_string();
+
+    let script_url_team = script_url.clone();
+    let script_gl_url_team = script_gl_url.clone();
+
     view! {
         <Stylesheet id="leptos" href="/pkg/dashboard-app.css"/>
         // injects a stylesheet into the document <head>
@@ -28,15 +35,21 @@ pub fn App() -> impl IntoView {
         // content for this welcome page
         <Router>
             <main>
+                <Body class="bg-gray-900 overflow-x-hide" />
                 <Routes>
                     <Route path="/" view=move || {
                         view! {
                             <HomePage />
+
+                            <script src=&script_gl_url></script>
+                            <script src=&script_url></script>
                         }
                     }/>
                     <Route path="/team" view=move || {
                         view! {
                             <TeamPage />
+                            <script src=&script_gl_url_team></script>
+                            <script src=&script_url_team></script>
                         }
                     }/>
                     <Route path="/*any" view=NotFound/>
@@ -47,7 +60,6 @@ pub fn App() -> impl IntoView {
 }
 
 /// 404 - Not Found
-#[allow(non_snake_case)]
 #[component]
 fn NotFound() -> impl IntoView {
     // set an HTTP status code 404
