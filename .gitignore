@@ -14,4 +14,6 @@ playwright/.cache/
 
 # Sass cache dir
 .sass-cache/
+
 style/output/output.css
+dashboard.db/
