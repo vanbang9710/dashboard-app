@@ -3,6 +3,7 @@ cfg_if::cfg_if! {
     if #[cfg(feature = "ssr")] {
 
         use crate::app::models::Person;
+        use crate::app::errors::{ ErrorMessage, PersonError };
         use surrealdb::engine::remote::ws::{Client, Ws};
         use surrealdb::opt::auth::Root;
         use surrealdb::{Error, Surreal};
@@ -19,7 +20,6 @@ cfg_if::cfg_if! {
             })
             .await;
             let _ = DB.use_ns("surreal").use_db("person").await;
-
         }
 
         pub async fn get_all_persons() -> Option<Vec<Person>> {
@@ -54,6 +54,62 @@ cfg_if::cfg_if! {
                 Err(e) => {
                     println!("error in adding person: {:?}",e);
                     None
+                }
+            }
+        }
+
+        pub async fn delete_person(person_uuid: String)
+            -> Result<Option<Person>, PersonError> {
+
+            open_db_connection().await;
+            let delete_results = DB.delete(("person",person_uuid)).await;
+            let _ = DB.invalidate().await;
+
+            match delete_results {
+                Ok(deleted_person) => Ok(deleted_person),
+                Err(_) => Err(PersonError::PersonDeleteFailure)
+            }
+        }
+
+        pub async fn update_person(uuid: String, title: String, level: String,
+            compensation: i32) -> Result<Option<Person>,PersonError> {
+
+            open_db_connection().await;
+
+            // first we try to find the person in the database
+            let find_person: Result<Option<Person>,Error> =
+                DB.select(("person",&uuid)).await;
+            match find_person {
+
+                Ok(found) => {
+
+                    // if we found the person, we update him/her
+                    match found {
+                        Some(found_person) => {
+
+                            let updated_user: Result<Option<Person>,Error> =
+                                DB.update(("person",&uuid))
+                                .merge(Person::new(
+                                    uuid,
+                                    found_person.name,
+                                    title,
+                                    level,
+                                    compensation,
+                                    found_person.joined_date
+                                ))
+                                .await;
+                            let _ = DB.invalidate().await;
+                            match updated_user {
+                                Ok(returned_user) => Ok(returned_user),
+                                Err(_) => Err(PersonError::PersonUpdateFailure)
+                            }
+                        },
+                        None => Err(PersonError::PersonUpdateFailure)
+                    }
+                },
+                Err(_) => {
+                    let _ = DB.invalidate().await;
+                    Err(PersonError::PersonNotFound)
                 }
             }
         }

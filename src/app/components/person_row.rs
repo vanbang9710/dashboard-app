@@ -1,4 +1,4 @@
-use crate::app::components::{ToastMessage};
+use crate::app::components::{EditPersonModal, ShowPersonModal, ToastMessage};
 use crate::app::models::Person;
 use leptos::*;
 use std::rc::Rc;
@@ -33,6 +33,25 @@ pub fn PersonRow(
 
     view! {
 
+        <Show when=move || { if_show_info_modal() }>
+            <ShowPersonModal
+                person=team_person.clone()
+                set_if_show_modal=set_if_show_info_modal
+                set_if_show_deleted=set_if_show_toast
+                person_resource
+                set_toast_message
+            />
+        </Show>
+
+        <Show when=move || { if_show_edit_modal() }>
+            <EditPersonModal
+                person=edit_person.clone()
+                set_if_show_modal=set_if_show_edit_modal
+                set_if_show_toast=set_if_show_toast
+                person_resource
+                set_toast_message
+            />
+        </Show>
         <div class=ROW_STYLE>
             <div class="flex flex-col w-full max-w-[45rem]">
                 <p class="font-bold">{&person.name}</p>

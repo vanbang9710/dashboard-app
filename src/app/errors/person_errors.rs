@@ -1,5 +1,6 @@
 // for person error
 
+use leptos::leptos_config::errors;
 use thiserror::Error;
 
 #[derive(Error, Debug)]

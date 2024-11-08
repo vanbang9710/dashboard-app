@@ -2,6 +2,7 @@
 #![allow(warnings)]
 pub mod components;
 pub mod db;
+pub mod errors;
 pub mod models;
 pub mod pages;
 pub mod server_functions;
@@ -24,9 +25,9 @@ pub fn App() -> impl IntoView {
     let script_gl_url_team = script_gl_url.clone();
 
     view! {
-        <Stylesheet id="leptos" href="/pkg/dashboard-app.css"/>
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
+        <Stylesheet id="leptos" href="/pkg/dashboard-app.css"/>
         <link data-trunk rel="tailwind-css" href="/style/input.css" />
 
         // sets the document title
